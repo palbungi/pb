@@ -13,7 +13,6 @@ sudo chmod 666 /var/run/docker.sock
 wget https://raw.githubusercontent.com/palbungi/pb/refs/heads/main/docker-compose.yml
 wget https://raw.githubusercontent.com/palbungi/pb/refs/heads/main/config.env
 
-
 # 서버 커맨드 다운로드
 wget  https://raw.githubusercontent.com/palbungi/pb/refs/heads/main/find.sh
 wget  https://raw.githubusercontent.com/palbungi/pb/refs/heads/main/online.sh
@@ -23,8 +22,6 @@ wget  https://raw.githubusercontent.com/palbungi/pb/refs/heads/main/remove.sh
 wget  https://raw.githubusercontent.com/palbungi/pb/refs/heads/main/time_regular_shutdown.sh
 touch /home/$(whoami)/over_memory_shutdown.log
 touch /home/$(whoami)/time_regular_shutdown.log
-
-
 
 # 서버 재시작 스크립트에 실행 권한 추가
 chmod +x /home/$(whoami)/*.sh
@@ -45,17 +42,12 @@ mkdir -p /home/$(whoami)/palworld/Pal/Saved/Config/LinuxServer
 wget -P /home/$(whoami)/palworld/Pal/Saved/Config/LinuxServer https://raw.githubusercontent.com/palbungi/pb/refs/heads/main/Engine.ini
 wget -P /home/$(whoami)/palworld/Pal/Saved/Config/LinuxServer https://raw.githubusercontent.com/palbungi/pb/refs/heads/main/GameUserSettings.ini
 
-
-
-
-
 # 서버 모드 디렉토리 생성 및 다운로드
 mkdir -p /home/$(whoami)/palworld/Pal/Content/Paks/LogicMods
 wget -P /home/$(whoami)/palworld/Pal/Content/Paks/LogicMods https://github.com/palbungi/pb/raw/refs/heads/main/LogicMods/060BNL_P.pak
 wget -P /home/$(whoami)/palworld/Pal/Content/Paks/LogicMods https://github.com/palbungi/pb/raw/refs/heads/main/LogicMods/060CampPalSickBuff1000_P.pak
 wget -P /home/$(whoami)/palworld/Pal/Content/Paks/LogicMods https://github.com/palbungi/pb/raw/refs/heads/main/LogicMods/060nofalldamage_P.pak
 wget -P /home/$(whoami)/palworld/Pal/Content/Paks/LogicMods https://github.com/palbungi/pb/raw/refs/heads/main/LogicMods/060pbshop_P.pak
-
 
 # 차후 서버이동을 위해 서버저장 폴더 미리 생성(nano 화면에서 새 콘솔창으로 서버데이터 업로드)
 mkdir -p /home/$(whoami)/palworld/Pal/Saved/SaveGames/0/0E5CEC4FB53C484D981BD8CA675709A8
