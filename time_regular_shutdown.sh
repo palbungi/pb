@@ -10,24 +10,28 @@ docker exec -i ${CONTAINER_NAME} rcon-cli "Broadcast Server_will_restart_in_10_m
 # 5분
 sleep 300
 docker exec -i ${CONTAINER_NAME} rcon-cli "Broadcast Server_will_restart_in_5_minutes"
+docker exec -i $CONTAINER_NAME rcon-cli save
 
 # 3분
 sleep 120
 docker exec -i ${CONTAINER_NAME} rcon-cli "Broadcast Server_will_restart_in_3_minutes"
+docker exec -i $CONTAINER_NAME rcon-cli save
 
 # 2분
 sleep 60
 docker exec -i ${CONTAINER_NAME} rcon-cli "Broadcast Server_will_restart_in_2_minutes"
+docker exec -i $CONTAINER_NAME rcon-cli save
 
 # 1분
 sleep 60
 docker exec -i ${CONTAINER_NAME} rcon-cli "Broadcast Server_will_restart_in_60_seconds"
 
-# 저장
+# 10초
+sleep 30
 docker exec -i $CONTAINER_NAME rcon-cli save
 
-# 10초
-sleep 50
+sleep 20
+
 docker exec -i ${CONTAINER_NAME} rcon-cli "Broadcast Server_will_restart_in_10_seconds"
 
 sleep 5
