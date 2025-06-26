@@ -65,7 +65,7 @@ nano config.env
 
 # Portainer 설치 및 실행(웹에서 서버관리)
 mkdir /home/$(whoami)/portainer
-wget -P /home/$(whoami)/portainer https://github.com/palbungi/pb/raw/refs/heads/main/portainer/docker-compose.yml
+wget -P /home/$(whoami)/portainer https://raw.githubusercontent.com/palbungi/pb/refs/heads/main/portainer/docker-compose.yml                                  
 docker-compose -f /home/$(whoami)/portainer/docker-compose.yml up -d
 
 # 설치파일 삭제
