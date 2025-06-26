@@ -9,28 +9,45 @@ sudo curl -L "https://github.com/docker/compose/releases/download/v2.37.1/docker
 sudo chmod +x /usr/local/bin/docker-compose
 sudo chmod 666 /var/run/docker.sock
 
-# 팰월드 도커 및 서버 재시작 스크립트 다운로드
+# 팰월드 도커 다운로드
 wget https://raw.githubusercontent.com/palbungi/pb/refs/heads/main/docker-compose.yml
 wget https://raw.githubusercontent.com/palbungi/pb/refs/heads/main/config.env
-wget https://raw.githubusercontent.com/palbungi/pb/refs/heads/main/regular_maintenance.sh
+
+
+# 서버 커맨드 다운로드
+wget  https://raw.githubusercontent.com/palbungi/pb/refs/heads/main/find.sh
+wget  https://raw.githubusercontent.com/palbungi/pb/refs/heads/main/online.sh
+wget  https://raw.githubusercontent.com/palbungi/pb/refs/heads/main/over_memory_shutdown.sh
+wget  https://raw.githubusercontent.com/palbungi/pb/refs/heads/main/player_check.py
+wget  https://raw.githubusercontent.com/palbungi/pb/refs/heads/main/remove.sh
+wget  https://raw.githubusercontent.com/palbungi/pb/refs/heads/main/time_regular_shutdown.sh
+touch /home/$(whoami)/over_memory_shutdown.log
+touch /home/$(whoami)/time_regular_shutdown.log
+
 
 
 # 서버 재시작 스크립트에 실행 권한 추가
-chmod +x /home/$(whoami)/regular_maintenance.sh
+chmod +x /home/$(whoami)/*.sh
+chmod +x /home/$(whoami)/*.py
+chmod +x /home/$(whoami)/*.log
 
 # 서버 재시작 예약(10분전 알림 후 재시작 하므로 3:50, 7:50, 11:50, 15:50, 19:50, 23:50에 각각 등록)
 (sudo crontab -l 2>/dev/null; echo "* */1 * * * /usr/bin/python3 /home/$(whoami)/player_check.py") | sudo crontab -
-(sudo crontab -l 2>/dev/null; echo "50 03 * * * /home/$(whoami)/regular_maintenance.sh") | sudo crontab -
-(sudo crontab -l 2>/dev/null; echo "50 07 * * * /home/$(whoami)/regular_maintenance.sh") | sudo crontab -
-(sudo crontab -l 2>/dev/null; echo "50 11 * * * /home/$(whoami)/regular_maintenance.sh") | sudo crontab -
-(sudo crontab -l 2>/dev/null; echo "50 15 * * * /home/$(whoami)/regular_maintenance.sh") | sudo crontab -
-(sudo crontab -l 2>/dev/null; echo "50 19 * * * /home/$(whoami)/regular_maintenance.sh") | sudo crontab -
-(sudo crontab -l 2>/dev/null; echo "50 23 * * * /home/$(whoami)/regular_maintenance.sh") | sudo crontab -
+(sudo crontab -l 2>/dev/null; echo "50 03 * * * /home/$(whoami)/time_regular_shutdown.sh >> /home/$(whoami)/time_regular_shutdown.log 2>&1") | sudo crontab -
+(sudo crontab -l 2>/dev/null; echo "50 07 * * * /home/$(whoami)/time_regular_shutdown.sh >> /home/$(whoami)/time_regular_shutdown.log 2>&1") | sudo crontab -
+(sudo crontab -l 2>/dev/null; echo "50 11 * * * /home/$(whoami)/time_regular_shutdown.sh >> /home/$(whoami)/time_regular_shutdown.log 2>&1") | sudo crontab -
+(sudo crontab -l 2>/dev/null; echo "50 15 * * * /home/$(whoami)/time_regular_shutdown.sh >> /home/$(whoami)/time_regular_shutdown.log 2>&1") | sudo crontab -
+(sudo crontab -l 2>/dev/null; echo "50 19 * * * /home/$(whoami)/time_regular_shutdown.sh >> /home/$(whoami)/time_regular_shutdown.log 2>&1") | sudo crontab -
+(sudo crontab -l 2>/dev/null; echo "50 23 * * * /home/$(whoami)/time_regular_shutdown.sh >> /home/$(whoami)/time_regular_shutdown.log 2>&1") | sudo crontab -
 
 # 서버 디렉토리 생성 및 설정파일 다운로드(Engine.ini 최적화, GameUserSettings.ini 서버저장 디렉토리 지정)
 mkdir -p /home/$(whoami)/palworld/Pal/Saved/Config/LinuxServer
 wget -P /home/$(whoami)/palworld/Pal/Saved/Config/LinuxServer https://raw.githubusercontent.com/palbungi/pb/refs/heads/main/Engine.ini
 wget -P /home/$(whoami)/palworld/Pal/Saved/Config/LinuxServer https://raw.githubusercontent.com/palbungi/pb/refs/heads/main/GameUserSettings.ini
+
+
+
+
 
 # 서버 모드 디렉토리 생성 및 다운로드
 mkdir -p /home/$(whoami)/palworld/Pal/Content/Paks/LogicMods
